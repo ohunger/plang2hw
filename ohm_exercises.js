@@ -3,14 +3,14 @@ import * as ohm from "ohm-js";
 export function matches(name,s) {
     const grammars = {
         canadianPostalCode: String.raw` G {
-                postalCode = allowedLetter digit allowedLetter “ “ digit allowedLetter digit
-                allowedLetter = “A”..”C” | “E” | “G”| “H” | “J”.. “N” | “P” | “R”..T” | “V”..”Z”
+            postalCode = allowedLetter digit allowedLetter “ “ digit allowedLetter digit
+            allowedLetter = “A”..”C” | “E” | “G”| “H” | “J”.. “N” | “P” | “R”..T” | “V”..”Z”
         }`,
         visa: String.raw` G {
-                visa = (fourDigits twelveDigits) | (fourDigits fifteenDigits)
-                fourDigits = digit digit digit digit
-                twelveDigits = digit{12}
-                fifteenDigits = digit{15}
+            visa = (fourDigits twelveDigits) | (fourDigits fifteenDigits)
+            fourDigits = digit digit digit digit
+            twelveDigits = digit{12}
+            fifteenDigits = digit{15}
         }`,
         masterCard: String.raw` G {
             masterCardNumber = ("5" ("1".."5") fourteenDigits) | ("2221".."2720" twelveDigits)
