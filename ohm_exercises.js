@@ -34,9 +34,8 @@ export function matches(name,s) {
             unicodeLetter = letter
         }`,
         restrictedFloats: String.raw` G {
-            floatingPointConstant = integerPart ("." digit*)? exponentPart
-            integerPart = digit+
-            exponentPart = ("e" | "E") ("+" | "-")? digit digit? digit?
+            floatingPointConstant = digit* ("." digit*)? exponent
+            exponent = ("e" | "E") ("+" | "-") digit digit? digit?
         }`,
         palindromes2358: String.raw` G {
             Palindromes
@@ -58,11 +57,16 @@ export function matches(name,s) {
             char = “a” | “b” | “c”
         }`,
         pythonStringLiterals: String.raw` G {
-            stringLiteral = tripleQuotedString | quotedString
-            tripleQuotedString = "'''" (~"'''" any)* "'''"
-                                | '"""' (~'"""' any)* '"""'
-            quotedString = "'" (~"'" any)* "'"
-                        | '"' (~'"' any)* '"'
+            StringLiteral    = StringPrefix? (ShortString | LongString)
+            StringPrefix     = "r" | "u" | "R" | "U" | "f" | "F"
+                                | ("f" ("R" | r") ) | ("F" ("r" | "R)) | ("r" | ("f" | "F")) | ("R" | ("f" | "F"))
+            ShortString      = "'" ShortStringItem* "'" | "\"" ShortStringItem* "\""
+            LongString       = "'''" LongStringItem* "'''" | '"""' LongStringItem* '"""'
+            ShortStringItem  = ShortStringChar | StringEscapeSeq
+            LongStringItem   = LongStringChar | StringEscapeSeq
+            ShortStringChar  = sourceChar - ("\\" | "\n" | "'") | StringEscapeSeq
+            LongStringChar   = sourceChar - "\\"
+            StringEscapeSeq  = "\\" sourceChar
         }`,
     };
 
