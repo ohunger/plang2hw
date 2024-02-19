@@ -30,7 +30,7 @@ export function matches(name,s) {
             decimalNumeral = (8-9) | (1-2) digit | 3 (0-2)
         }`,
         notPythonPycharmPyc: String.raw` G {
-            NotPythonWords = !(<"python"> | <"pycharm"> | <"pyc">) UnicodeLetter+ end;
+            NotPythonWords = !(<"python"> | <"pycharm"> | <"pyc">) letter+ end;
         }`,
         restrictedFloats: String.raw` G {
             floatingPointConstant = digit* ("." digit*)? exponent
