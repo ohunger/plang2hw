@@ -13,7 +13,7 @@ export function matches(name,s) {
             fifteenDigits = digit{15}
         }`,
         masterCard: String.raw` G {
-            masterCardNumber = ("5" ("1".."5") fourteenDigits) | ("2221".."2720" twelveDigits)
+            masterCardNumber = ("5" ("1".."5") fourteenDigits) | ("2"(("2".."6" digit digit)| ("7" ("0".."1" digit)|("2""0"))) twelveDigits)
             fourteenDigits = digit{14}
             twelveDigits = digit{12}
             twothousandNum = 
